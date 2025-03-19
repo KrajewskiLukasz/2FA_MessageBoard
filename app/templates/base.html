@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikacja Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Witaj {{ current_user.username }}</h3>
+        <a href="{{ url_for('main.home') }}" class="btn btn-primary">Strona główna</a>
+        <a href="{{ url_for('main.profile', username=current_user.username) }}" class="btn btn-info">Mój profil</a>
+        <a href="{{ url_for('main.logout') }}" class="btn btn-secondary">Wyloguj się</a>
+    </div>
+    <div class="main-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

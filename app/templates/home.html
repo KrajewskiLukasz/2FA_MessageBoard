@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dodaj nową wiadomość</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title.label }}
+        {{ form.title(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.content.label }}
+        {{ form.content(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+<hr>
+<h2>Wiadomości użytkowników</h2>
+<div class="messages-container">
+    {% for message in messages %}
+        <div class="message">
+            <p><small>Dodane przez: <a href="{{ url_for('main.profile', username=message.author.username) }}">{{ message.author.username }}</a></small></p>
+            <h3>{{ message.title }}</h3>
+            <p>{{ message.content|safe }}</p>
+            <p><small>Dodane dnia: {{ message.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
+            <p>
+                {% if message.verified %}
+                    <span style="color: green;">Zweryfikowany</span>
+                {% else %}
+                    <span style="color: red;">Niezweryfikowany</span>
+                {% endif %}
+            </p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

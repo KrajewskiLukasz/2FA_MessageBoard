@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Profil użytkownika: {{ user.username }}</h2>
+    <hr>
+    <h2>Wiadomości użytkownika</h2>
+    <div class="messages-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message">
+                    <h3>{{ message.title }}</h3>
+                    <p>{{ message.content|safe }}</p>
+                    <p><small>Dodane dnia: {{ message.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}   |   </small>
+                        {% if message.verified %}
+                            <span style="color: green;">Zweryfikowany</span>
+                        {% else %}
+                            <span style="color: red;">Niezweryfikowany</span>
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Użytkownik nie ma jeszcze żadnych wiadomości.</p>
+        {% endif %}
+    </div>
+{% endblock %}

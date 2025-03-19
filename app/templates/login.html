@@ -1,0 +1,27 @@
+{% extends "base_no_sidebar.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Zaloguj się</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.totp.label }}
+            {{ form.totp(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+    <p>Nie masz konta? <a href="{{ url_for('main.register') }}">Zarejestruj się</a><br>
+    Nie pamiętasz hasła? <a href="{{ url_for('main.reset_password') }}">Zmień hasło</a></p>
+</div>
+{% endblock %}

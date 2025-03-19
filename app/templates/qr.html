@@ -1,0 +1,9 @@
+{% extends "base_no_sidebar.html" %}
+
+{% block content %}
+<h2>Ustawienie weryfikacji dwuetapowej</h2>
+<p>Zeskanuj poniższy kod QR w aplikacji Google Authenticator:</p>
+<img src="https://api.qrserver.com/v1/create-qr-code/?data={{ otp_url|urlencode }}&size=200x200" alt="Kod QR">
+<p>Jeśli nie możesz zeskanować kodu QR, użyj tego klucza w aplikacji: <strong>{{ otp_url.split('secret=')[1].split('&')[0] }}</strong></p>
+<a href="{{ url_for('main.login') }}">Przejdź do logowania</a>
+{% endblock %}
